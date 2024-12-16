@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Packages</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: #f7f7f7;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #ff6f61;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://img.freepik.com/premium-photo/breathtaking-view-from-airplane-window-great-view-generative-ai_888418-10712.jpg') no-repeat center center/cover;
+      color: #fff;
+      padding: 100px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Filters Section */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filters button {
+      font-size: 1rem;
+    }
+
+    /* Packages Grid */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .package-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .package-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .package-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .package-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .package-card h3 {
+      font-size: 1.2rem;
+      margin: 15px;
+    }
+
+    .package-card p {
+      margin: 15px;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .package-card button {
+      display: block;
+      margin: 15px auto;
+      padding: 10px 25px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #ff6f61;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .filters {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filterButtons = document.querySelectorAll(".filters button");
+      const packages = document.querySelectorAll(".package-card");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.textContent.toLowerCase();
+          let count = 0;
+
+          packages.forEach((pkg) => {
+            const category = pkg.dataset.category.toLowerCase();
+            if (filter === "all" || category === filter) {
+              pkg.style.display = count < (filter === "luxury" ? 5 : 10) ? "block" : "none";
+              count++;
+            } else {
+              pkg.style.display = "none";
+            }
+          });
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Discover Your Next Adventure</h1>
+      <p>Explore the best travel packages and create unforgettable memories.</p>
+      <button onclick="location.href='cart.html'">Start Your Journey</button>
+    </section>
+
+    <!-- Package Filters Section -->
+    <section class="filters">
+      <button>All</button>
+      <button>Adventure</button>
+      <button>Relaxation</button>
+      <button>Luxury</button>
+    </section>
+
+    <!-- Packages Grid -->
+    <div class="packages">
+      <!-- Example Packages with Categories -->
+      <div class="package-card" data-category="adventure">
+        <img src="/images/taj-mahal.jpg" alt="Taj Mahal Visit">
+        <h3>Taj Mahal Visit</h3>
+        <p>Explore the iconic Taj Mahal in Agra.</p>
+        <p><strong>Price: $199</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="relaxation">
+        <img src="/images/goa-beach.jpg" alt="Goa Beach">
+        <h3>Goa Beaches</h3>
+        <p>Relax and unwind on the stunning beaches of Goa.</p>
+        <p><strong>Price: $149</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="luxury">
+        <img src="/images/maldives.jpg" alt="Maldives">
+        <h3>Maldives</h3>
+        <p>Relax on the pristine beaches of the Maldives.</p>
+        <p><strong>Price: $699</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <!-- Additional 10 package cards with categories -->
+      <div class="package-card" data-category="adventure">
+        <img src="/images/everest.jpg" alt="Mount Everest">
+        <h3>Mount Everest Trek</h3>
+        <p>Conquer the world’s highest peak.</p>
+        <p><strong>Price: $1599</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="adventure">
+        <img src="/images/amazon.jpg" alt="Amazon Rainforest">
+        <h3>Amazon Rainforest</h3>
+        <p>Explore the wilds of the Amazon rainforest.</p>
+        <p><strong>Price: $1200</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="relaxation">
+        <img src="/images/bali.jpg" alt="Bali Beaches">
+        <h3>Bali Beaches</h3>
+        <p>Soak up the sun on Bali’s tranquil beaches.</p>
+        <p><strong>Price: $299</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="relaxation">
+        <img src="/images/phuket.jpg" alt="Phuket">
+        <h3>Phuket</h3>
+        <p>Discover the beauty of Thailand's most famous island.</p>
+        <p><strong>Price: $350</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="luxury">
+        <img src="/images/dubai.jpg" alt="Dubai Luxury">
+        <h3>Dubai Luxury</h3>
+        <p>Experience luxury at its finest in Dubai.</p>
+        <p><strong>Price: $999</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="luxury">
+        <img src="/images/santorini.jpg" alt="Santorini">
+        <h3>Santorini</h3>
+        <p>Enjoy the beauty of Greece’s island paradise.</p>
+        <p><strong>Price: $799</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="adventure">
+        <img src="/images/safari.jpg" alt="Safari Adventure">
+        <h3>Africa Safari</h3>
+        <p>Go on a thrilling safari in Africa.</p>
+        <p><strong>Price: $1500</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="relaxation">
+        <img src="/images/spa.jpg" alt="Spa Retreat">
+        <h3>Spa Retreat</h3>
+        <p>Indulge in a luxurious spa retreat in the hills.</p>
+        <p><strong>Price: $600</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="luxury">
+        <img src="/images/paris.jpg" alt="Paris Luxury">
+        <h3>Paris Luxury</h3>
+        <p>Experience luxury and romance in Paris.</p>
+        <p><strong>Price: $1200</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+
+      <div class="package-card" data-category="adventure">
+        <img src="/images/asia.jpg" alt="Asia Exploration">
+        <h3>Explore Asia</h3>
+        <p>Discover the diverse cultures and landscapes of Asia.</p>
+        <p><strong>Price: $900</strong></p>
+        <button onclick="location.href='details_form.html'">Select</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Travel Agency | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Details Form & Admin Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff6f61;
+      margin-top: 40px;
+      font-size: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .form-container, .dashboard-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .form-container label, .dashboard-container h2 {
+      font-weight: bold;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .form-container input, .form-container button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      color: #333;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .form-container input:focus, .form-container button:hover {
+      background-color: #ff6f61;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .form-container button {
+      background-color: #ff6f61;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #ff4c38;
+      transform: scale(1.1);
+    }
+
+    .dashboard-container table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .dashboard-container th, .dashboard-container td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .dashboard-container th {
+      background-color: #ff6f61;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard-container tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .dashboard-container tr:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.02);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Transition effects */
+    .form-container, .dashboard-container {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Fill Your Details</h1>
+  
+  <div class="form-container">
+    <form id="detailsForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="price">Package Price</label>
+      <input type="text" id="price" placeholder="Enter package price" required>
+
+      <label for="bankAccount">Bank Account Number</label>
+      <input type="number" id="bankAccount" placeholder="Enter your bank account number" required>
+
+      <button type="button" onclick="generatePDF()">Submit</button>
+    </form>
+  </div>
+
+  <div class="dashboard-container">
+    <h2>Registered Users</h2>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Package Price</th>
+          <th>Bank Account</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- User details will be populated here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2024 Travel Packages. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    let userData = [
+      { name: "John Doe", email: "johndoe@example.com", price: "$500", bankAccount: "123456789" },
+      { name: "Jane Smith", email: "janesmith@example.com", price: "$600", bankAccount: "987654321" },
+      { name: "Samuel Adams", email: "samueladams@example.com", price: "$700", bankAccount: "456789012" }
+    ];  // Pre-populated user data
+
+    async function generatePDF() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const price = document.getElementById("price").value;
+      const bankAccount = document.getElementById("bankAccount").value;
+
+      if (!name || !email || !price || !bankAccount) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Add new user to the userData array
+      userData.push({ name, email, price, bankAccount });
+
+      // Update the user table in the dashboard
+      updateUserTable();
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Add title "Invoice Generated"
+      doc.setFontSize(16);
+      doc.text("Invoice Generated", 20, 20);
+
+      // Add travel package details
+      doc.setFontSize(12);
+      doc.text("Travel Package Details", 20, 40);
+      doc.text(`Name: ${name}`, 20, 50);
+      doc.text(`Email: ${email}`, 20, 60);
+      doc.text(`Price: $${price}`, 20, 70);
+      doc.text(`Bank Account Number: ${bankAccount}`, 20, 80);
+      doc.text("Thank you for booking with us!", 20, 90);
+
+      // Save the PDF
+      doc.save("Travel_Package_Invoice.pdf");
+
+      // Clear the form fields
+      document.getElementById("detailsForm").reset();
+    }
+
+    function updateUserTable() {
+      const tableBody = document.getElementById("userTable").getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = '';  // Clear the existing rows
+
+      userData.forEach((user, index) => {
+        const row = tableBody.insertRow();
+
+        const nameCell = row.insertCell(0);
+        const emailCell = row.insertCell(1);
+        const priceCell = row.insertCell(2);
+        const bankAccountCell = row.insertCell(3);
+
+        nameCell.textContent = user.name;
+        emailCell.textContent = user.email;
+        priceCell.textContent = user.price;
+        bankAccountCell.textContent = user.bankAccount;
+      });
+    }
+
+    // Initial population of the user table
+    updateUserTable();
+  </script>
+
+</body>
+</html>

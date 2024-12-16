@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.6) url('https://static.vecteezy.com/system/resources/thumbnails/037/248/582/small_2x/ai-generated-travelling-to-thailand-advertisment-background-with-copy-space-free-photo.jpg') no-repeat center center/cover;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #ff6f61;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Cart Section */
+    .cart-items {
+      margin-top: 20px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-items h2 {
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+      padding-left: 15px;
+    }
+
+    .cart-item-price {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .cart-item button {
+      background: #ff6f61;
+      border-radius: 5px;
+      padding: 8px 16px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-item button:hover {
+      background-color: #ff5a47;
+    }
+
+    /* Summary Section */
+    .cart-summary {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    .cart-summary h3 {
+      margin-bottom: 15px;
+    }
+
+    .total-price {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Checkout Button */
+    .checkout-button {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .checkout-button button {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      background-color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cart Section -->
+    <div class="cart-items">
+      <h2>Your Cart</h2>
+
+      <!-- Example Cart Item -->
+      <div class="cart-item">
+        <img src="/images/everest.jpg" alt="Mount Everest Base Camp">
+        <div class="cart-item-info">
+          <h3>Mount Everest Base Camp</h3>
+          <p>Adventure Package</p>
+        </div>
+        <div class="cart-item-price">
+          <p>$899</p>
+        </div>
+        <div>
+          <button>Remove</button>
+        </div>
+      </div>
+
+      <!-- Add more cart items here -->
+    </div>
+
+    <!-- Cart Summary Section -->
+    <div class="cart-summary">
+      <h3>Cart Summary</h3>
+      <p>Total Items: 2</p>
+      <p class="total-price">Total: $1398</p>
+    </div>
+
+    <!-- Checkout Button -->
+    <div class="checkout-button">
+      <button>Proceed to Checkout</button>
+    </div>
+  </div>
+</body>
+</html>
